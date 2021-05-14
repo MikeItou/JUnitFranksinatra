@@ -1,10 +1,10 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage{
     @FindBy(css="[name='username']")
@@ -37,7 +37,13 @@ public class LoginPage extends BasePage{
         loginButton.click();
     }
 
-    public void wrongLogin(){
-        explicitWait.until(ExpectedConditions.attributeContains(waitForElementVisible(errorLoginFlashMessage),"div","The username or password you entered are incorrect"));
+    public void validateWrongLogin(){
+        try{
+            waitForElementVisible(errorLoginFlashMessage);
+            Assert.assertEquals("The text is incorrect", errorLoginFlashMessage.getText(), "The username or password you entered are incorrect");
+            //explicitWait.until(ExpectedConditions.attributeContains(errorLoginFlashMessage, "textContent", "The username or password you entered are incorrect"));
+        }catch (TimeoutException te){
+            System.out.println("Error Login Flash Message isn't visible.");
+        }
     }
 }

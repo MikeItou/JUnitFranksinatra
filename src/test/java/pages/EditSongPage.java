@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,8 @@ public class EditSongPage extends BasePage{
     WebElement saveSongButton;
     @FindBy(css="[href='/logout']")
     WebElement logoutButton;
+    @FindBy(css="//h1[contains(.,'Internal')]")
+    WebElement internalErrorMessage;
 
     public EditSongPage(WebDriver driver){
         super(driver);
@@ -38,11 +41,21 @@ public class EditSongPage extends BasePage{
         }
     }
 
-    public void fillEditSongFields(String title, String length, String date, String lyrics){
+    public void editSongFields(String title, String length, String date, String lyrics){
         titleField.sendKeys(title);
         lengthField.sendKeys(length);
         releaseField.sendKeys(date);
         lyricsField.sendKeys(lyrics);
         saveSongButton.click();
+    }
+
+    public void internalServerError(String errorMessage){
+        try {
+            waitForElementVisible(internalErrorMessage);
+            Assert.assertEquals("Error message is present",internalErrorMessage.getText(),errorMessage);
+            //System.out.println("Error message is present");
+        }catch (TimeoutException te){
+            System.out.println("Error message isn't present");
+        }
     }
 }
