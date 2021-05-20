@@ -26,8 +26,6 @@ public class SongInfoPage extends BasePage{
     WebElement editSongslink;
     @FindBy(css="[value='delete this song']")
     WebElement deleteSongButton;
-    @FindBy(css="[href='/logout']")
-    WebElement logoutLink;
     WebElement specificSongName;
 
     public SongInfoPage(WebDriver driver) {
@@ -45,7 +43,6 @@ public class SongInfoPage extends BasePage{
             waitForElementVisible(indexSongLink);
             waitForElementVisible(editSongslink);
             waitForElementVisible(deleteSongButton);
-            waitForElementVisible(logoutLink);
             System.out.println("All SpecificSongPage elements are visible.");
         }catch (TimeoutException te){
             System.out.println("All SpecificSongPage elements aren't visible.");

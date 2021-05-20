@@ -12,25 +12,16 @@ public class AboutPage extends BasePage{
         super(driver);
     }
 
-    @FindBy(css="//p[contains(.,'This')]")
+    @FindBy(xpath="//p[contains(.,'This site')]")
     WebElement aboutPageMessage;
-    @FindBy(css="[href='/logout']")
-    WebElement logoutLink;
-    //@FindBy(css="[href='/login']")
-    //WebElement loginLink;
 
     public void validateAboutPage(){
         try {
-            waitForElementVisible(logoutLink);
             waitForElementVisible(aboutPageMessage);
-            Assert.assertEquals("About Page elements aren visible.",aboutPageMessage.getText(),"This site is a demonstration of how to build a website using Sinatra.");
+            Assert.assertEquals(aboutPageMessage.getText(),"This site is a demonstration of how to build a website using Sinatra.");
+            System.out.println("About Page elements are visible.");
         }catch (TimeoutException te){
             System.out.println("About Page elements aren't visible.");
         }
     }
-
-    public void clickLogout(){
-        logoutLink.click();
-    }
-
 }

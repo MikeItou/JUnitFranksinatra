@@ -17,8 +17,6 @@ public class SongsPage extends BasePage {
     WebElement createsongLink;
     @FindBy(css = "#songs")
     WebElement songList;
-    @FindBy(css = "[href='/logout']")
-    WebElement logoutLink;
     @FindBy(css = "a[href *= '/songs/']")
     List<WebElement> songLinks;
     @FindBy(css = ".flash")
@@ -33,7 +31,6 @@ public class SongsPage extends BasePage {
             waitForElementVisible(songsHeader);
             waitForElementVisible(createsongLink);
             waitForElementVisible(songList);
-            waitForElementVisible(logoutLink);
 
             System.out.println("All SongsPage elements are visible.");
         } catch (TimeoutException te) {
@@ -43,10 +40,6 @@ public class SongsPage extends BasePage {
 
     public void clickCreateSong() {
         createsongLink.click();
-    }
-
-    public void clickLogout() {
-        logoutLink.click();
     }
 
     public void selectSong(String songName) throws Exception {

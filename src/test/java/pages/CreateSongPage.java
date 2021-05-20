@@ -22,8 +22,6 @@ public class CreateSongPage extends BasePage{
     WebElement lyricsField;
     @FindBy(css="[type='submit']")
     WebElement saveSongButton;
-    @FindBy(css="[href='/logout']")
-    WebElement logoutLink;
     @FindBy(css="//h1[contains(.,'Add')]")
     WebElement addSongHeader;
     @FindBy(css = ".flash")
@@ -38,7 +36,6 @@ public class CreateSongPage extends BasePage{
             waitForElementVisible(dateField);
             waitForElementVisible(lyricsField);
             waitForElementVisible(saveSongButton);
-            waitForElementVisible(logoutLink);
             System.out.println("Create Song Page elements are visible.");
         }catch (TimeoutException te){
             System.out.println("Create Song Page elements aren´t visible.");

@@ -18,8 +18,6 @@ public class EditSongPage extends BasePage{
     WebElement lyricsField;
     @FindBy(css="[value='Save Song']")
     WebElement saveSongButton;
-    @FindBy(css="[href='/logout']")
-    WebElement logoutButton;
     @FindBy(css="//h1[contains(.,'Internal')]")
     WebElement internalErrorMessage;
 
@@ -34,7 +32,6 @@ public class EditSongPage extends BasePage{
             waitForElementVisible(releaseField);
             waitForElementVisible(lyricsField);
             waitForElementVisible(saveSongButton);
-            waitForElementVisible(logoutButton);
             System.out.println("All EditSongPage elements are visible.");
         }catch (TimeoutException te){
             System.out.println("All EditSongsPage elements aren't visible.");

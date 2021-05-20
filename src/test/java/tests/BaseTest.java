@@ -20,6 +20,7 @@ public class BaseTest {
     protected CreateSongPage createSongPage;
     protected AboutPage aboutPage;
     protected UnauthorizePage unauthorizePage;
+    protected ContactPage contactPage;
 
     public void setupWebPage(String browser, String url){
         switch (browser) {
@@ -38,6 +39,7 @@ public class BaseTest {
         createSongPage = new CreateSongPage(driver);
         aboutPage = new AboutPage(driver);
         unauthorizePage = new UnauthorizePage(driver);
+        contactPage = new ContactPage(driver);
     }
 
     @After

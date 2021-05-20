@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -23,4 +24,8 @@ public class BasePage {
     protected WebElement waitForElementVisible(WebElement element){
         return this.explicitWait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    /*protected Assert assertElement(String errorMessage, WebElement textToValidate, String messageToValidate){
+        return Assert.assertEquals(errorMessage,textToValidate.getText(),messageToValidate);
+    }*/
 }
