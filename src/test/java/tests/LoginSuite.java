@@ -21,6 +21,7 @@ public class LoginSuite extends BaseTest {
         loginPage.fillLoginValues(username, password);
         songsPage.validateSongsPage();
         songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        mainPage.verifyLogoutLink();
     }
 
     @Test
@@ -78,5 +79,86 @@ public class LoginSuite extends BaseTest {
         mainPage.clickHomeLink();
         mainPage.validateMainPage();
         mainPage.verifyLogoutLink();
+    }
+
+    @Test
+    @FileParameters("./data/IncorrectLoginGoToHomePage.csv")
+    public void incorrectLoginGoToHomePage(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        loginPage.validateWrongLogin();
+        mainPage.validateMenu();
+        mainPage.clickHomeLink();
+        mainPage.verifyLoginLink();
+    }
+
+    @Test
+    @FileParameters("./data/IncorrectLoginGoToAboutPage.csv")
+    public void incorrectLoginGoToAboutPage(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        loginPage.validateWrongLogin();
+        mainPage.validateMenu();
+        mainPage.clickAboutLink();
+        aboutPage.validateAboutPage();
+        mainPage.verifyLoginLink();
+    }
+
+    @Test
+    @FileParameters("./data/IncorrectLoginGoToContactPage.csv")
+    public void incorrectLoginGoToContactPage(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        loginPage.validateWrongLogin();
+        mainPage.validateMenu();
+        mainPage.clickContactLink();
+        contactPage.validateContactPage();
+        mainPage.verifyLoginLink();
+    }
+
+    @Test
+    @FileParameters("./data/IncorrectLoginGoToSongsPage.csv")
+    public void incorrectLoginGoToSongsPage(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        loginPage.validateWrongLogin();
+        mainPage.validateMenu();
+        mainPage.clickSongsLink();
+        songsPage.validateSongsPage();
+        mainPage.verifyLoginLink();
+    }
+
+    @Test
+    @FileParameters("./data/CorrectLoginThenLogout.csv")
+    public void correctLoginThenLogout(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        mainPage.verifyLogoutLink();
+        mainPage.clickLogoutLink();
+        mainPage.validateSuccessfulLogoutMessage("You have now logged out");
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
     }
 }

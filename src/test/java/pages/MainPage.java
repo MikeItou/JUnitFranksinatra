@@ -96,8 +96,8 @@ public class MainPage extends BasePage {
     public void validateSuccessfulLogoutMessage(String message){
         try {
             waitForElementVisible(successfullLogoutFlashMessage);
-            Assert.assertEquals("Successful Logout Flash Message is present.",successfullLogoutFlashMessage.getText(), message);
-            //System.out.println("Successful Login Flash Message is present");
+            Assert.assertEquals(successfullLogoutFlashMessage.getText(), message);
+            System.out.println("Successful Logout Flash Message is present");
         } catch (TimeoutException te) {
             System.out.println("Successful Logout Flash Message isn't present.");
         }
