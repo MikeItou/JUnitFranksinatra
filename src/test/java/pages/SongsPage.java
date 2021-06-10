@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class SongsPage extends BasePage {
 
@@ -17,7 +18,7 @@ public class SongsPage extends BasePage {
     WebElement createsongLink;
     @FindBy(css = "#songs")
     WebElement songList;
-    @FindBy(css = "a[href *= '/songs/']")
+    @FindBy(css = "#songs a[href *= '/songs/']")
     List<WebElement> songLinks;
     @FindBy(css = ".flash")
     WebElement songDeletedFlashMessage;
@@ -42,21 +43,25 @@ public class SongsPage extends BasePage {
         createsongLink.click();
     }
 
-    public void selectSong(String songName) throws Exception {
-
+    public void selectSong(String songName) {
+        boolean isFound = false;
         for (WebElement songLink : songLinks) {
-            if (songLink.getText().equals(songName)) {
+            if (songLink.getText().equals(songName)){
                 songLink.click();
+                isFound = true;
+                break;
             }
         }
-        throw new Exception(songName + " is not in the songList");
+        if(!isFound) {
+            throw new NoSuchElementException(songName + " is not in the songList");
+        }
     }
 
     public void validateSuccessfulLoginMessage(String message) {
         try {
             waitForElementVisible(successfullLoginFlashMessage);
             Assert.assertEquals("Successful Login Flash Message is present.",successfullLoginFlashMessage.getText(), message);
-            //System.out.println("Successful Login Flash Message is present");
+            System.out.println("Successful Login Flash Message is present.");
         } catch (TimeoutException te) {
             System.out.println("Successful Login Flash Message isn't present.");
         }
@@ -65,8 +70,8 @@ public class SongsPage extends BasePage {
     public void validateDeletedSong() {
         try {
             waitForElementVisible(songDeletedFlashMessage);
-            Assert.assertEquals("Delete Song Flash Message is present.",songDeletedFlashMessage.getText(), "Song deleted");
-            //System.out.println("Delete Song Flash Message is present.");
+            Assert.assertEquals(songDeletedFlashMessage.getText(), "Song deleted");
+            System.out.println("Delete Song Flash Message is present.");
         } catch (TimeoutException te) {
             System.out.println("Delete Song Flash Message isn't present.");
         }

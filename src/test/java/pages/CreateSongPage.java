@@ -22,7 +22,7 @@ public class CreateSongPage extends BasePage{
     WebElement lyricsField;
     @FindBy(css="[type='submit']")
     WebElement saveSongButton;
-    @FindBy(css="//h1[contains(.,'Add')]")
+    @FindBy(xpath="//h1[contains(.,'Add')]")
     WebElement addSongHeader;
     @FindBy(css = ".flash")
     WebElement createdSongFlashMessage;
@@ -30,15 +30,15 @@ public class CreateSongPage extends BasePage{
     public void validateCreateSongPage(){
         try{
             waitForElementVisible(addSongHeader);
-            Assert.assertEquals(addSongHeader.getText(),"Add a New Song");
+            Assert.assertEquals(addSongHeader.getText(),"Add A New Song");
             waitForElementVisible(titleField);
             waitForElementVisible(lengthField);
             waitForElementVisible(dateField);
             waitForElementVisible(lyricsField);
             waitForElementVisible(saveSongButton);
-            System.out.println("Create Song Page elements are visible.");
+            System.out.println("Create SongPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("Create Song Page elements aren´t visible.");
+            System.out.println("Create SongPage elements aren't visible.");
         }
     }
 
@@ -53,7 +53,8 @@ public class CreateSongPage extends BasePage{
     public void validateCreatedSong(){
         try {
             waitForElementVisible(createdSongFlashMessage);
-            Assert.assertEquals("Created Song flash message is visible.",createdSongFlashMessage.getText(),"Song successfully added");
+            Assert.assertEquals(createdSongFlashMessage.getText(),"Song successfully added");
+            System.out.println("Created Song flash message is visible.");
         }catch (TimeoutException te){
             System.out.println("Created Song flash message isn't visible.");
         }

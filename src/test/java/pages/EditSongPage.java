@@ -39,18 +39,37 @@ public class EditSongPage extends BasePage{
     }
 
     public void editSongFields(String title, String length, String date, String lyrics){
-        titleField.sendKeys(title);
-        lengthField.sendKeys(length);
-        releaseField.sendKeys(date);
-        lyricsField.sendKeys(lyrics);
+        if (!title.isEmpty()){
+            titleField.clear();
+            titleField.sendKeys(title);
+            System.out.println("Holo ado en el titulo.");
+        }
+
+        if (!length.isEmpty()){
+            lengthField.clear();
+            lengthField.sendKeys(length);
+            System.out.println("Holo ado en la duracion.");
+        }
+
+        if (!date.isEmpty()){
+            releaseField.clear();
+            releaseField.sendKeys(date);
+            System.out.println("Holo ado en la fecha.");
+        }
+
+        if (!lyrics.isEmpty()){
+            lyricsField.clear();
+            lyricsField.sendKeys(length);
+            System.out.println("Holo ado en la letra dela cancion.");
+        }
         saveSongButton.click();
     }
 
     public void internalServerError(String errorMessage){
         try {
             waitForElementVisible(internalErrorMessage);
-            Assert.assertEquals("Error message is present",internalErrorMessage.getText(),errorMessage);
-            //System.out.println("Error message is present");
+            Assert.assertEquals(internalErrorMessage.getText(),errorMessage);
+            System.out.println("Error message is present");
         }catch (TimeoutException te){
             System.out.println("Error message isn't present");
         }

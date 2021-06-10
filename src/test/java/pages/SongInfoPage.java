@@ -1,12 +1,10 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SongInfoPage extends BasePage{
 
@@ -26,15 +24,18 @@ public class SongInfoPage extends BasePage{
     WebElement editSongslink;
     @FindBy(css="[value='delete this song']")
     WebElement deleteSongButton;
+    @FindBy(css="section h1")
     WebElement specificSongName;
+    @FindBy(css = ".flash")
+    WebElement updatedFlashMessage;
 
     public SongInfoPage(WebDriver driver) {
         super(driver);
     }
 
-    public void validateSpecificSongPage(String songName){
+    public void validateSpecificSongPageInfo(String title){
         try{
-            specificSongName = explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(.,"+songName+")]")));
+            waitForElementVisible(specificSongName);
             waitForElementVisible(releaseDateSongInfo);
             waitForElementVisible(lengthSongInfo);
             waitForElementVisible(lyricsInfo);
@@ -43,9 +44,9 @@ public class SongInfoPage extends BasePage{
             waitForElementVisible(indexSongLink);
             waitForElementVisible(editSongslink);
             waitForElementVisible(deleteSongButton);
-            System.out.println("All SpecificSongPage elements are visible.");
+            System.out.println("All SpecificSongPage elements of "+ title +" song are visible.");
         }catch (TimeoutException te){
-            System.out.println("All SpecificSongPage elements aren't visible.");
+            System.out.println("All SpecificSongPage elements of "+ title +" song aren't visible.");
         }
     }
 
@@ -62,19 +63,56 @@ public class SongInfoPage extends BasePage{
         deleteSongButton.click();
     }
 
-    public void updateLikeNumbers(String likeTimes){
-        try{
-            waitForElementVisible(numberOfLikesInfo);
-            if(likeTimes.equals("once")){
-                Assert.assertEquals(numberOfLikesInfo.getText(),"This song has been liked " + likeTimes);
-            }
-            else{
-                Assert.assertEquals(numberOfLikesInfo.getText(),"This song has been liked " + likeTimes + "times");
-            }
-            System.out.println("Number of likes is present and up to date.");
-        }catch (TimeoutException te){
-            System.out.println("Number of likes is not present.");
+    public String updateLikeNumbers(){
+        if ((numberOfLikesInfo.getText()).contains("Nobody")){
+            System.out.println("Number on likes is 0.");
+            return "0";
+        }
+
+        else if ((numberOfLikesInfo.getText()).contains("once")){
+            //System.out.println("Number on likes is 1.");
+            return "1";
+        }
+
+        else {
+            String[] partsOfMessage = (numberOfLikesInfo.getText()).split(" ");
+            //System.out.println("Number on likes is " +partsOfMessage[partsOfMessage.length-2]+ ".");
+            return partsOfMessage[partsOfMessage.length-2];
         }
     }
 
+    public void compareLikeNumbers(String beforeLike, String afterLike) {
+        int beforeCast = Integer.parseInt(beforeLike);
+        int afterCast = Integer.parseInt(afterLike);
+
+        if (beforeCast > afterCast) {
+            System.out.println("INCORRECT!! There's a decrease in the number of likes." +
+                    "\nBefore Like count: " + beforeLike +
+                    "\nAfter Like count: " + afterLike);
+        }
+
+        else if (afterCast == beforeCast){
+            System.out.println("INCORRECT!! There's no change in the like numbers." +
+                    "\nBefore Like count: " + beforeLike +
+                    "\nAfter Like count: " + afterLike);
+        }
+
+        else{
+            System.out.println("CORRECT!! There's a increase in the number of likes." +
+                    "\nBefore Like count: " + beforeLike +
+                    "\nAfter Like count: " + afterLike);
+
+        }
+    }
+
+    public void validateSuccessfulUpdatedMessage(String updatedMessage) {
+        try {
+            waitForElementVisible(updatedFlashMessage);
+            Assert.assertEquals(updatedFlashMessage.getText(),updatedMessage);
+            System.out.println("Updated Song Flash Message is visible.");
+        }
+        catch (TimeoutException te){
+            System.out.println("Updated Song Flash Message isn't visible.");
+        }
+    }
 }

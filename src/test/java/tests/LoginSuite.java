@@ -4,8 +4,6 @@ import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import pages.BasePage;
 
 @RunWith(JUnitParamsRunner.class)
 public class LoginSuite extends BaseTest {
@@ -145,20 +143,47 @@ public class LoginSuite extends BaseTest {
     }
 
     @Test
-    @FileParameters("./data/CorrectLoginThenLogout.csv")
-    public void correctLoginThenLogout(String browser, String url, String username, String password){
+    @FileParameters("./data/AboutPageCorrectLogin.csv")
+    public void aboutPageCorrectLogin(String browser, String url, String username, String password){
         setupWebPage(browser, url);
-        mainPage.validateMainPage();
+        mainPage.validateMenu();
+        mainPage.clickAboutLink();
+        aboutPage.validateAboutPage();
         mainPage.verifyLoginLink();
         mainPage.clickLoginLink();
         loginPage.validateLoginPage();
-        loginPage.fillLoginValues(username, password);
+        loginPage.fillLoginValues(username,password);
         songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
         songsPage.validateSongsPage();
-        mainPage.verifyLogoutLink();
-        mainPage.clickLogoutLink();
-        mainPage.validateSuccessfulLogoutMessage("You have now logged out");
-        mainPage.validateMainPage();
+    }
+
+    @Test
+    @FileParameters("./data/ContactPageCorrectLogin.csv")
+    public void contactPageCorrectLogin(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMenu();
+        mainPage.clickContactLink();
+        contactPage.validateContactPage();
         mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username,password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+    }
+
+    @Test
+    @FileParameters("./data/SongsPageCorrectLogin.csv")
+    public void songsPageCorrectLogin(String browser, String url, String username, String password){
+        setupWebPage(browser, url);
+        mainPage.validateMenu();
+        mainPage.clickSongsLink();
+        songsPage.validateSongsPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username,password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
     }
 }

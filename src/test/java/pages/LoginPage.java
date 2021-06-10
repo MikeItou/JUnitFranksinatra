@@ -40,7 +40,7 @@ public class LoginPage extends BasePage{
     public void validateWrongLogin(){
         try{
             waitForElementVisible(errorLoginFlashMessage);
-            Assert.assertEquals("The text is incorrect", errorLoginFlashMessage.getText(), "The username or password you entered are incorrect");
+            Assert.assertEquals(errorLoginFlashMessage.getText(), "The username or password you entered are incorrect");
             //explicitWait.until(ExpectedConditions.attributeContains(errorLoginFlashMessage, "textContent", "The username or password you entered are incorrect"));
             System.out.println("Error Login Flash Message is visible.");
         }catch (TimeoutException te){
