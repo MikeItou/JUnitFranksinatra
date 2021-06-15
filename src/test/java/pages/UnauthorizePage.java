@@ -14,8 +14,6 @@ public class UnauthorizePage extends BasePage{
 
     @FindBy(css = "//h1[contains(.,'Unauthorized')]")
     WebElement unauthorizedHeader;
-    //@FindBy(css = "//p[contains(.,'You need to be')]")
-    //WebElement loggedinMessageLogin;
     @FindBy(css = "//a[contains(.,'logged in')]")
     WebElement loggedinLink;
     @FindBy(css = "//a[contains(.,'log in')]")
@@ -24,23 +22,13 @@ public class UnauthorizePage extends BasePage{
     WebElement aboutMessage;
 
     public void validateUnauthorizePage(){
-        /*try {
-            waitForElementVisible(unauthorizedHeader);
-            Assert.assertEquals(unauthorizedHeader.getText(),"Unauthorized");
-            waitForElementVisible(loggedinMessageLogin);
-            Assert.assertEquals(loggedinMessageLogin.getText(),"You need to be logged in to view this page.");
-            waitForElementVisible(loggedinLink);
-            waitForElementVisible(loginLink);
-            System.out.println("Unauthorized Page elements are visible.Your are logedout");
-        }catch (TimeoutException te){
-            System.out.println("Unauthorized Page elements aren't visible. Your are logedout");
-        }*/
         try {
             waitForElementVisible(loginLink);
             waitForElementVisible(aboutMessage);
-            Assert.assertEquals("Unauthorized Page elements are visible. Your are logedin",aboutMessage.getText(),"This site is a demonstration of how to build a website using Sinatra.");
+            Assert.assertEquals(aboutMessage.getText(),"This site is a demonstration of how to build a website using Sinatra.");
+            System.out.println("Unauthorized Page elements are visible. Your are logedin");
         }catch (TimeoutException te){
-            System.out.println("Unauthorized Page elements aren't visible. Your are logedin");
+            throw new TimeoutException("Unauthorized Page elements aren't visible. Your are logedin");
         }
     }
 

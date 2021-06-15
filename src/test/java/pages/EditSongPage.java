@@ -18,7 +18,7 @@ public class EditSongPage extends BasePage{
     WebElement lyricsField;
     @FindBy(css="[value='Save Song']")
     WebElement saveSongButton;
-    @FindBy(css="//h1[contains(.,'Internal')]")
+    @FindBy(xpath="//h1[contains(.,'Internal')]")
     WebElement internalErrorMessage;
 
     public EditSongPage(WebDriver driver){
@@ -34,34 +34,31 @@ public class EditSongPage extends BasePage{
             waitForElementVisible(saveSongButton);
             System.out.println("All EditSongPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("All EditSongsPage elements aren't visible.");
+            throw new TimeoutException("All EditSongsPage elements aren't visible.");
         }
     }
 
     public void editSongFields(String title, String length, String date, String lyrics){
-        if (!title.isEmpty()){
+        if (!title.equals("Nothing to change")){
             titleField.clear();
             titleField.sendKeys(title);
-            System.out.println("Holo ado en el titulo.");
         }
 
-        if (!length.isEmpty()){
+        if (!length.equals("Nothing to change")){
             lengthField.clear();
             lengthField.sendKeys(length);
-            System.out.println("Holo ado en la duracion.");
         }
 
-        if (!date.isEmpty()){
-            releaseField.clear();
+        if (!date.equals("Nothing to change")){
             releaseField.sendKeys(date);
-            System.out.println("Holo ado en la fecha.");
+            releaseField.clear();
         }
 
-        if (!lyrics.isEmpty()){
+        if (!lyrics.equals("Nothing to change")){
             lyricsField.clear();
-            lyricsField.sendKeys(length);
-            System.out.println("Holo ado en la letra dela cancion.");
+            lyricsField.sendKeys(lyrics);
         }
+
         saveSongButton.click();
     }
 
@@ -71,7 +68,7 @@ public class EditSongPage extends BasePage{
             Assert.assertEquals(internalErrorMessage.getText(),errorMessage);
             System.out.println("Error message is present");
         }catch (TimeoutException te){
-            System.out.println("Error message isn't present");
+            throw new TimeoutException("Error message isn't present");
         }
     }
 }

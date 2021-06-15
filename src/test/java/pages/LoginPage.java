@@ -27,7 +27,7 @@ public class LoginPage extends BasePage{
             waitForElementVisible(loginButton);
             System.out.println("All LoginPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("All LoginPage elements aren't visible.");
+            throw new TimeoutException("All LoginPage elements aren't visible.");
         }
     }
 
@@ -44,7 +44,7 @@ public class LoginPage extends BasePage{
             //explicitWait.until(ExpectedConditions.attributeContains(errorLoginFlashMessage, "textContent", "The username or password you entered are incorrect"));
             System.out.println("Error Login Flash Message is visible.");
         }catch (TimeoutException te){
-            System.out.println("Error Login Flash Message isn't visible.");
+            throw new TimeoutException("Error Login Flash Message isn't visible.");
         }
     }
 }

@@ -123,6 +123,125 @@ public class SongSuite extends BaseTest{
         editSongPage.validateEditSongPage();
         editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
         songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
+        songInfoPage.validateSpecificSongPageInfo(title);
+    }
+
+    @Test
+    @FileParameters("./data/EditSongDate.csv")
+    public void editSongDate(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
+        songInfoPage.validateSpecificSongPageInfo(title);
+    }
+
+    @Test
+    @FileParameters("./data/EditSongLyrics.csv")
+    public void editSongLyrics(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
+        songInfoPage.validateSpecificSongPageInfo(title);
+    }
+
+    @Test
+    @FileParameters("./data/EditVoidSongTitle.csv")
+    public void editVoidSongTitle(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
         songInfoPage.validateSpecificSongPageInfo(newTitle);
+    }
+
+    @Test
+    @FileParameters("./data/EditVoidSongDuration.csv")
+    public void editVoidSongDuration(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
+        songInfoPage.validateSpecificSongPageInfo(newTitle);
+    }
+
+    @Test
+    @FileParameters("./data/EditVoidSongLyrics.csv")
+    public void editVoidSongLyrics(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        songInfoPage.validateSuccessfulUpdatedMessage("Song successfully updated");
+        songInfoPage.validateSpecificSongPageInfo(newTitle);
+    }
+
+    @Test
+    @FileParameters("./data/EditVoidSongDate.csv")
+    public void editVoidSongDate(String browser, String url, String username, String password, String title, String newTitle, String newLength, String newDate, String newLyrics){
+        setupWebPage(browser,url);
+        mainPage.validateMainPage();
+        mainPage.verifyLoginLink();
+        mainPage.clickLoginLink();
+        loginPage.validateLoginPage();
+        loginPage.fillLoginValues(username, password);
+        songsPage.validateSuccessfulLoginMessage("You are now logged in as " + username);
+        songsPage.validateSongsPage();
+        songsPage.selectSong(title);
+        songInfoPage.validateSpecificSongPageInfo(title);
+        songInfoPage.clickEditSong();
+        editSongPage.validateEditSongPage();
+        editSongPage.editSongFields(newTitle,newLength,newDate,newLyrics);
+        editSongPage.internalServerError("Internal Server Error");
     }
 }

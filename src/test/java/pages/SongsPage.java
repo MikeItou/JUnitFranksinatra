@@ -35,7 +35,7 @@ public class SongsPage extends BasePage {
 
             System.out.println("All SongsPage elements are visible.");
         } catch (TimeoutException te) {
-            System.out.println("All SongsPage elements aren't visible.");
+            throw new TimeoutException("All SongsPage elements aren't visible");
         }
     }
 
@@ -63,7 +63,7 @@ public class SongsPage extends BasePage {
             Assert.assertEquals("Successful Login Flash Message is present.",successfullLoginFlashMessage.getText(), message);
             System.out.println("Successful Login Flash Message is present.");
         } catch (TimeoutException te) {
-            System.out.println("Successful Login Flash Message isn't present.");
+            throw new TimeoutException("Successful Login Flash Message isn't present.");
         }
     }
 
@@ -73,7 +73,7 @@ public class SongsPage extends BasePage {
             Assert.assertEquals(songDeletedFlashMessage.getText(), "Song deleted");
             System.out.println("Delete Song Flash Message is present.");
         } catch (TimeoutException te) {
-            System.out.println("Delete Song Flash Message isn't present.");
+            throw new TimeoutException("Delete Song Flash Message isn't present.");
         }
     }
 }

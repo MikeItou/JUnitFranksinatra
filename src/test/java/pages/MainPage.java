@@ -37,7 +37,7 @@ public class MainPage extends BasePage {
             waitForElementVisible(imageFrankSinatra);
             System.out.println("All MainPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("All MainPage elements aren't visible.");
+            throw new TimeoutException("All MainPage elements aren't visible.");
         }
     }
 
@@ -49,7 +49,7 @@ public class MainPage extends BasePage {
             waitForElementVisible(songsLink);
             System.out.println("All menu elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("All menu elements aren't visible.");
+            throw new TimeoutException("All menu elements aren't visible.");
         }
     }
 
@@ -80,7 +80,7 @@ public class MainPage extends BasePage {
             waitForElementVisible(loginLink);
             System.out.println("Login link is present.");
         }catch (TimeoutException te){
-            System.out.println("Login link isn't present.");
+            throw new TimeoutException("Login link isn't present.");
         }
     }
 
@@ -89,7 +89,7 @@ public class MainPage extends BasePage {
             waitForElementVisible(logoutLink);
             System.out.println("Logout link is present.");
         }catch (TimeoutException te){
-            System.out.println("Logout link isn't present.");
+            throw new TimeoutException("Logout link isn't present.");
         }
     }
 
@@ -99,7 +99,7 @@ public class MainPage extends BasePage {
             Assert.assertEquals(successfullLogoutFlashMessage.getText(), message);
             System.out.println("Successful Logout Flash Message is present");
         } catch (TimeoutException te) {
-            System.out.println("Successful Logout Flash Message isn't present.");
+            throw new TimeoutException("Successful Logout Flash Message isn't present.");
         }
     }
 }

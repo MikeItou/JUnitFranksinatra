@@ -21,7 +21,7 @@ public class AboutPage extends BasePage{
             Assert.assertEquals(aboutPageMessage.getText(),"This site is a demonstration of how to build a website using Sinatra.");
             System.out.println("About Page elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("About Page elements aren't visible.");
+            throw new TimeoutException("About Page elements aren't visible.");
         }
     }
 }

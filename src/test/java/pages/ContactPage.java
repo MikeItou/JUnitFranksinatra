@@ -45,11 +45,10 @@ public class ContactPage extends BasePage{
             Assert.assertEquals(messageTag.getText(),"Your Message:");
             waitForElementVisible(messageField);
             waitForElementVisible(sendMessageButton);
-            //Assert.assertEquals(,sendMessageButton.getText(),"Send Message");
 
             System.out.println("All ContactPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("All ContactPage elements aren't visible.");
+            throw new TimeoutException("All ContactPage elements aren't visible.");
         }
     }
 
@@ -65,7 +64,7 @@ public class ContactPage extends BasePage{
             waitForElementVisible(internalErrorMesage);
             System.out.println("Error message is present.");
         }catch (TimeoutException te){
-            System.out.println("Error message isn't present.");
+            throw new TimeoutException("Error message isn't present.");
         }
     }
 }

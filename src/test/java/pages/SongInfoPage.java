@@ -46,7 +46,7 @@ public class SongInfoPage extends BasePage{
             waitForElementVisible(deleteSongButton);
             System.out.println("All SpecificSongPage elements of "+ title +" song are visible.");
         }catch (TimeoutException te){
-            System.out.println("All SpecificSongPage elements of "+ title +" song aren't visible.");
+            throw new TimeoutException("All SpecificSongPage elements of "+ title +" song aren't visible.");
         }
     }
 
@@ -70,13 +70,11 @@ public class SongInfoPage extends BasePage{
         }
 
         else if ((numberOfLikesInfo.getText()).contains("once")){
-            //System.out.println("Number on likes is 1.");
             return "1";
         }
 
         else {
             String[] partsOfMessage = (numberOfLikesInfo.getText()).split(" ");
-            //System.out.println("Number on likes is " +partsOfMessage[partsOfMessage.length-2]+ ".");
             return partsOfMessage[partsOfMessage.length-2];
         }
     }
@@ -112,7 +110,7 @@ public class SongInfoPage extends BasePage{
             System.out.println("Updated Song Flash Message is visible.");
         }
         catch (TimeoutException te){
-            System.out.println("Updated Song Flash Message isn't visible.");
+            throw new TimeoutException("Updated Song Flash Message isn't visible.");
         }
     }
 }

@@ -19,13 +19,7 @@ public class BasePage {
         PageFactory.initElements(this.driver,this);
     }
 
-
-
     protected WebElement waitForElementVisible(WebElement element){
         return this.explicitWait.until(ExpectedConditions.visibilityOf(element));
     }
-
-    /*protected Assert assertElement(String errorMessage, WebElement textToValidate, String messageToValidate){
-        return Assert.assertEquals(errorMessage,textToValidate.getText(),messageToValidate);
-    }*/
 }

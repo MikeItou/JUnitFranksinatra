@@ -38,7 +38,7 @@ public class CreateSongPage extends BasePage{
             waitForElementVisible(saveSongButton);
             System.out.println("Create SongPage elements are visible.");
         }catch (TimeoutException te){
-            System.out.println("Create SongPage elements aren't visible.");
+            throw new TimeoutException("Create SongPage elements aren't visible.");
         }
     }
 
@@ -56,7 +56,7 @@ public class CreateSongPage extends BasePage{
             Assert.assertEquals(createdSongFlashMessage.getText(),"Song successfully added");
             System.out.println("Created Song flash message is visible.");
         }catch (TimeoutException te){
-            System.out.println("Created Song flash message isn't visible.");
+            throw new TimeoutException("Created Song flash message isn't visible.");
         }
     }
 }
